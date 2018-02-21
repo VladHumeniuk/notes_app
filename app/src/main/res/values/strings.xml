@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">NotesViper</string>
+
+    <string name="action_notes_list">Notes List</string>
+    <string name="action_categories_list">Categories</string>
+
+    <string name="notes_list_title">Notes List</string>
+
+    <string name="create_note_title">New Note</string>
+    <string name="title_hint">Title</string>
+    <string name="note_hint">Note</string>
+    <string name="empty_note_fields_error">Note title and description should not be empty</string>
+
+    <string name="date_created_title">Created on:</string>
+    <string name="date_edited_title">Last edited on:</string>
+
+    <string name="save_label">save</string>
+</resources>
