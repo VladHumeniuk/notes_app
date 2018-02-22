@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,8 +55,10 @@ public class EditNoteFragment extends BaseFragment implements EditNoteView {
     public void showNote(Note note) {
         titleEditText.setText(note.getTitle());
         descriptionEditText.setText(note.getDescription());
-        createdTextView.setText(dateFormat.format(note.getDateCreated()));
-        editedTextView.setText(dateFormat.format(note.getDateLastEdit()));
+        createdTextView.setText(getString(R.string.date_created_title,
+                dateFormat.format(note.getDateCreated())));
+        editedTextView.setText(getString(R.string.date_edited_title,
+                dateFormat.format(note.getDateLastEdit())));
     }
 
     @Override
@@ -67,6 +72,7 @@ public class EditNoteFragment extends BaseFragment implements EditNoteView {
     @Override
     protected void inject(ActivityComponent activityComponent) {
         activityComponent.inject(this);
+        presenter.setView(this);
     }
 
     @Override
@@ -76,6 +82,50 @@ public class EditNoteFragment extends BaseFragment implements EditNoteView {
 
     @Override
     protected int getTitle() {
-        return 0;
+        return R.string.note_details_label;
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        presenter.setNote((Note) getArguments().get(NOTE_EXTRA));
+    }
+
+    @Override
+    protected boolean showOptionsMenu() {
+        return true;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_save_delete, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save: {
+                presenter.saveNote(String.valueOf(titleEditText.getText()),
+                        String.valueOf(descriptionEditText.getText()));
+                return true;
+            }
+            case R.id.action_delete: {
+                showDeleteConfirmationDialog();
+                return true;
+            }
+            default: {
+                return super.onOptionsItemSelected(item);
+            }
+        }
+    }
+
+    private void showDeleteConfirmationDialog() {
+        new AlertDialog.Builder(getContext())
+                .setCancelable(true)
+                .setTitle(R.string.delete_note_confirmation_text)
+                .setPositiveButton(R.string.delete_label, (d, i) -> presenter.deleteNote())
+                .setNegativeButton(R.string.cancel_label, (d, i) -> {})
+                .show();
     }
 }

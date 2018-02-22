@@ -6,13 +6,19 @@ import dagger.Module;
 import dagger.Provides;
 import io.reactivex.Scheduler;
 import masters.vlad.humeniuk.notesviper.di.scopes.UserScope;
+import masters.vlad.humeniuk.notesviper.domain.interactors.AddCategoryInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.AddNoteInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.CategoriesListInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.DeleteNoteInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.EditNoteInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.InitDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.NotesListInteractor;
 import masters.vlad.humeniuk.notesviper.presentation.categories.presenter.CategoriesListPresenter;
 import masters.vlad.humeniuk.notesviper.presentation.categories.presenter.CategoriesListPresenterImpl;
 import masters.vlad.humeniuk.notesviper.presentation.categories.router.CategoriesListRouter;
+import masters.vlad.humeniuk.notesviper.presentation.createcategory.presenter.CreateCategoryPresenter;
+import masters.vlad.humeniuk.notesviper.presentation.createcategory.presenter.CreateCategoryPresenterImpl;
+import masters.vlad.humeniuk.notesviper.presentation.createcategory.router.CreateCategoryRouter;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.presenter.CreateNotePresenter;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.presenter.CreateNotePresenterImpl;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.router.CreateNoteRouter;
@@ -60,8 +66,13 @@ public class PresenterModule {
 
     @Provides
     @UserScope
-    EditNotePresenter provideEditNotePresenter(EditNoteRouter router) {
-        return new EditNotePresenterImpl(router);
+    EditNotePresenter provideEditNotePresenter(EditNoteRouter router,
+                                               @Named(IO_SCHEDULER) Scheduler ioScheduler,
+                                               @Named(UI_SCHEDULER) Scheduler uiScheduler,
+                                               EditNoteInteractor editNoteInteractor,
+                                               DeleteNoteInteractor deleteNoteInteractor) {
+        return new EditNotePresenterImpl(router, ioScheduler, uiScheduler,
+                editNoteInteractor, deleteNoteInteractor);
     }
 
     @Provides
@@ -70,6 +81,16 @@ public class PresenterModule {
                                                            @Named(UI_SCHEDULER) Scheduler uiScheduler,
                                                            CategoriesListRouter router,
                                                            CategoriesListInteractor categoriesListInteractor) {
-        return new CategoriesListPresenterImpl(ioScheduler, uiScheduler, router, categoriesListInteractor);
+        return new CategoriesListPresenterImpl(ioScheduler, uiScheduler,
+                router, categoriesListInteractor);
+    }
+
+    @Provides
+    @UserScope
+    CreateCategoryPresenter provideCreateCategoryPresenter(CreateCategoryRouter router,
+                                                           @Named(IO_SCHEDULER) Scheduler ioScheduler,
+                                                           @Named(UI_SCHEDULER) Scheduler uiScheduler,
+                                                           AddCategoryInteractor interactor) {
+        return new CreateCategoryPresenterImpl(router, ioScheduler, uiScheduler, interactor);
     }
 }

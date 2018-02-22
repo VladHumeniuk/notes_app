@@ -8,12 +8,16 @@ import masters.vlad.humeniuk.notesviper.di.scopes.UserScope;
 import masters.vlad.humeniuk.notesviper.domain.interactors.AddCategoryInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.AddNoteInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.CategoriesListInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.DeleteNoteInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.EditNoteInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.InitDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.NotesListByCategoryInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.NotesListInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.AddCategoryDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.AddNoteInteractorImpl;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.CategoriesListDbInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.DeleteNoteDbInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.EditNoteDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.InitDbInteractorImpl;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.NotesListByCategoryDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.NotesListDbInteractor;
@@ -63,5 +67,19 @@ public class InteractorModule {
     @UserScope
     InitDbInteractor provideInitDbInteractor(CategoryDao categoryDao) {
         return new InitDbInteractorImpl(categoryDao);
+    }
+
+    @Provides
+    @UserScope
+    EditNoteInteractor provideEditNoteInteractor(NoteDao noteDao,
+                                                 NoteDbMapper mapper) {
+        return new EditNoteDbInteractor(noteDao, mapper);
+    }
+
+    @Provides
+    @UserScope
+    DeleteNoteInteractor provideDeleteNoteInteractor(NoteDao noteDao,
+                                                   NoteDbMapper mapper) {
+        return new DeleteNoteDbInteractor(noteDao, mapper);
     }
 }

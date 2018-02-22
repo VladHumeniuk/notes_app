@@ -19,7 +19,7 @@ public class InitDbInteractorImpl implements InitDbInteractor {
     @Override
     public Observable<Long> init() {
         DbCategory dbCategory = new DbCategory();
-        dbCategory.setName("Undefined category");
+        dbCategory.setName("No category");
         dbCategory.setId(0);
         dbCategory.setColor("#aaaaff");
         return Observable.fromCallable(() -> categoryDao.findAll())

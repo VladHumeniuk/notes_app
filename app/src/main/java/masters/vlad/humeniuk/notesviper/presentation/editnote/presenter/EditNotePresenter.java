@@ -10,4 +10,6 @@ public interface EditNotePresenter {
     void saveNote(String title, String description);
 
     void setView(EditNoteView view);
+
+    void deleteNote();
 }

@@ -8,6 +8,7 @@ import butterknife.BindView;
 import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.domain.entity.Note;
 import masters.vlad.humeniuk.notesviper.presentation.base.list.BaseViewHolder;
+import masters.vlad.humeniuk.notesviper.presentation.base.list.ItemSelectedListener;
 
 public class NoteViewHolder extends BaseViewHolder<Note> {
 
@@ -17,8 +18,14 @@ public class NoteViewHolder extends BaseViewHolder<Note> {
     @BindView(R.id.container_view)
     protected View containerView;
 
-    public NoteViewHolder(View itemView) {
+    @BindView(R.id.clickable_view)
+    protected View clickableView;
+
+    private ItemSelectedListener<Note> listener;
+
+    public NoteViewHolder(View itemView, ItemSelectedListener<Note> listener) {
         super(itemView);
+        this.listener = listener;
     }
 
     @Override
@@ -26,5 +33,6 @@ public class NoteViewHolder extends BaseViewHolder<Note> {
         super.bind(entity);
         titleView.setText(entity.getTitle());
         containerView.setBackgroundColor(Color.parseColor(entity.getCategory().getColor()));
+        clickableView.setOnClickListener(v -> listener.onItemSelected(entity));
     }
 }

@@ -75,7 +75,7 @@ public class CreateNoteFragment extends BaseFragment implements CreateNoteView {
         switch (item.getItemId()) {
             case R.id.action_save: {
                 presenter.onSaveNote(String.valueOf(titleEditText.getText()),
-                        String.valueOf(titleEditText.getText()));
+                        String.valueOf(descriptionEditText.getText()));
                 return true;
             }
             default: {

@@ -4,9 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1px">
 
     <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/clickable_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"

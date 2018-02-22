@@ -1,7 +1,5 @@
 package masters.vlad.humeniuk.notesviper.presentation.categories.presenter;
 
-import android.util.Log;
-
 import io.reactivex.Scheduler;
 import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.domain.interactors.CategoriesListInteractor;
@@ -51,8 +49,7 @@ public class CategoriesListPresenterImpl extends RxPresenter implements Categori
         subscribe(LOAD_CATEGORIES, categoriesListInteractor.getCategoriesList()
                 .subscribeOn(ioScheduler)
                 .observeOn(uiScheduler)
-                .subscribe(list -> view.showCategories(list),
-                        throwable -> Log.d("error", throwable.getMessage())));
+                .subscribe(view::showCategories));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package masters.vlad.humeniuk.notesviper.presentation.editnote.router;
 
+import android.app.Activity;
+
 import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.domain.entity.Note;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseActivity;
@@ -19,6 +21,7 @@ public class EditNoteRouterImpl extends BaseRouter implements EditNoteRouter{
 
     @Override
     public void backToMain() {
-        getActivityContext().onBackPressed();
+        getActivityContext().setResult(Activity.RESULT_OK);
+        getActivityContext().finish();
     }
 }

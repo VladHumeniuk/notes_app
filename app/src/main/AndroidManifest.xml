@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".presentation.createnote.CreateNoteActivity" />
         <activity android:name=".presentation.editnote.EditNoteActivity" />
+        <activity android:name=".presentation.createcategory.CreateCategoryActivity" />
     </application>
 
 </manifest>

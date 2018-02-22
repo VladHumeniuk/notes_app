@@ -9,6 +9,8 @@ import masters.vlad.humeniuk.notesviper.di.modules.RouterModule;
 import masters.vlad.humeniuk.notesviper.di.modules.SchedulerModule;
 import masters.vlad.humeniuk.notesviper.di.scopes.UserScope;
 import masters.vlad.humeniuk.notesviper.presentation.categories.view.CategoriesListFragment;
+import masters.vlad.humeniuk.notesviper.presentation.createcategory.CreateCategoryActivity;
+import masters.vlad.humeniuk.notesviper.presentation.createcategory.view.CreateCategoryFragment;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.CreateNoteActivity;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.view.CreateNoteFragment;
 import masters.vlad.humeniuk.notesviper.presentation.editnote.EditNoteActivity;
@@ -33,6 +35,8 @@ public interface ActivityComponent {
 
     void inject(EditNoteActivity activity);
 
+    void inject(CreateCategoryActivity activity);
+
     void inject(NotesListFragment fragment);
 
     void inject(CreateNoteFragment fragment);
@@ -40,4 +44,6 @@ public interface ActivityComponent {
     void inject(EditNoteFragment fragment);
 
     void inject(CategoriesListFragment fragment);
+
+    void inject(CreateCategoryFragment fragment);
 }

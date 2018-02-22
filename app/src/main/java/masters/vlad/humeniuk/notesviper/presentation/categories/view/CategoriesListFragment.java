@@ -1,5 +1,7 @@
 package masters.vlad.humeniuk.notesviper.presentation.categories.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.di.components.ActivityComponent;
 import masters.vlad.humeniuk.notesviper.domain.entity.Category;
@@ -71,5 +74,18 @@ public class CategoriesListFragment extends BaseFragment implements CategoriesLi
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_categories_list;
+    }
+
+    @OnClick(R.id.add_category)
+    protected void onAddCategoryClick() {
+        presenter.onAddCategoryClick();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            presenter.init();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

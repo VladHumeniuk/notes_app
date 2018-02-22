@@ -20,6 +20,7 @@ import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.di.components.ActivityComponent;
 import masters.vlad.humeniuk.notesviper.domain.entity.Note;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseFragment;
+import masters.vlad.humeniuk.notesviper.presentation.base.list.ItemSelectedListener;
 import masters.vlad.humeniuk.notesviper.presentation.noteslist.presenter.NotesListPresenter;
 import masters.vlad.humeniuk.notesviper.presentation.noteslist.view.list.NotesAdapter;
 
@@ -58,7 +59,7 @@ public class NotesListFragment extends BaseFragment implements NotesListView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-        adapter = new NotesAdapter(getContext());
+        adapter = new NotesAdapter(getContext(), listener);
         layoutManager = new LinearLayoutManager(getContext());
         notesListView.setLayoutManager(layoutManager);
         notesListView.setAdapter(adapter);
@@ -88,4 +89,12 @@ public class NotesListFragment extends BaseFragment implements NotesListView {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private ItemSelectedListener<Note> listener = new ItemSelectedListener<Note>() {
+
+        @Override
+        public void onItemSelected(Note entity) {
+            presenter.onNoteSelected(entity);
+        }
+    };
 }

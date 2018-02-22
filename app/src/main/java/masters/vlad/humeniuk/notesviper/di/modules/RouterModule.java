@@ -6,6 +6,8 @@ import masters.vlad.humeniuk.notesviper.di.scopes.UserScope;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseActivity;
 import masters.vlad.humeniuk.notesviper.presentation.categories.router.CategoriesListRouter;
 import masters.vlad.humeniuk.notesviper.presentation.categories.router.CategoriesListRouterImpl;
+import masters.vlad.humeniuk.notesviper.presentation.createcategory.router.CreateCategoryRouter;
+import masters.vlad.humeniuk.notesviper.presentation.createcategory.router.CreateCategoryRouterImpl;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.router.CreateNoteRouter;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.router.CreateNoteRouterImpl;
 import masters.vlad.humeniuk.notesviper.presentation.editnote.router.EditNoteRouter;
@@ -46,5 +48,11 @@ public class RouterModule {
     @UserScope
     CategoriesListRouter provideCategoriesListRouter(BaseActivity baseActivity) {
         return new CategoriesListRouterImpl(baseActivity);
+    }
+
+    @Provides
+    @UserScope
+    CreateCategoryRouter provideCreateCategoryRouter(BaseActivity baseActivity) {
+        return new CreateCategoryRouterImpl(baseActivity);
     }
 }

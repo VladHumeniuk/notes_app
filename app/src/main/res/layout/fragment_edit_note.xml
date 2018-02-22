@@ -21,15 +21,18 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/date_edited"
-            style="@style/DefaultText.16sp"
+            style="@style/DefaultText.12sp"
             android:text="@string/date_edited_title"
-            app:layout_constraintEnd_toEndOf="@id/date_container"/>
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/date_container"
+            app:layout_constraintTop_toBottomOf="@id/date_created"/>
 
     </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/title"
         style="@style/DefaultText.24sp"
+        android:layout_width="match_parent"
         android:hint="@string/title_hint"
         android:lines="1"
         tools:text="title"/>

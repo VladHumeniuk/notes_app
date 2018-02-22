@@ -7,11 +7,15 @@ import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.domain.entity.Note;
 import masters.vlad.humeniuk.notesviper.presentation.base.list.BaseAdapter;
 import masters.vlad.humeniuk.notesviper.presentation.base.list.BaseViewHolder;
+import masters.vlad.humeniuk.notesviper.presentation.base.list.ItemSelectedListener;
 
 public class NotesAdapter extends BaseAdapter<Note> {
 
-    public NotesAdapter(Context context) {
+    private ItemSelectedListener<Note> listener;
+
+    public NotesAdapter(Context context, ItemSelectedListener<Note> listener) {
         super(context);
+        this.listener = listener;
     }
 
     @Override
@@ -21,6 +25,6 @@ public class NotesAdapter extends BaseAdapter<Note> {
 
     @Override
     protected BaseViewHolder createViewHolder(View itemView, int viewType) {
-        return new NoteViewHolder(itemView);
+        return new NoteViewHolder(itemView, listener);
     }
 }
