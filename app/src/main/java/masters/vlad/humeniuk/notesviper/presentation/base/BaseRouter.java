@@ -25,7 +25,7 @@ public class BaseRouter {
     }
 
     protected void clearBackStack() {
-        getFragmentManager().popBackStackImmediate("", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     protected void startActivity(Intent intent) {

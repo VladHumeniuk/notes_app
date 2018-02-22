@@ -1,8 +1,6 @@
 package masters.vlad.humeniuk.notesviper.presentation.base.list;
 
-import android.widget.AdapterView;
-
-public interface ItemLongClickSelectedListener<E> extends AdapterView.OnItemSelectedListener {
+public interface ItemLongClickSelectedListener<E> extends ItemSelectedListener<E> {
 
     void onItemLongClick(E entity);
 }

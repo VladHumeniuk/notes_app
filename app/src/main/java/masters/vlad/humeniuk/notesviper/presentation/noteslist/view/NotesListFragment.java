@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.di.components.ActivityComponent;
+import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.domain.entity.Note;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseFragment;
 import masters.vlad.humeniuk.notesviper.presentation.base.list.ItemSelectedListener;
@@ -25,6 +26,8 @@ import masters.vlad.humeniuk.notesviper.presentation.noteslist.presenter.NotesLi
 import masters.vlad.humeniuk.notesviper.presentation.noteslist.view.list.NotesAdapter;
 
 public class NotesListFragment extends BaseFragment implements NotesListView {
+
+    private static final String ARG_CATEGORY = "category";
 
     @BindView(R.id.notes_list)
     protected RecyclerView notesListView;
@@ -38,6 +41,16 @@ public class NotesListFragment extends BaseFragment implements NotesListView {
     public static NotesListFragment newInstance() {
 
         Bundle args = new Bundle();
+
+        NotesListFragment fragment = new NotesListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static NotesListFragment newInstance(Category category) {
+
+        Bundle args = new Bundle();
+        args.putParcelable(ARG_CATEGORY, category);
 
         NotesListFragment fragment = new NotesListFragment();
         fragment.setArguments(args);
@@ -63,13 +76,9 @@ public class NotesListFragment extends BaseFragment implements NotesListView {
         layoutManager = new LinearLayoutManager(getContext());
         notesListView.setLayoutManager(layoutManager);
         notesListView.setAdapter(adapter);
-        return view;
-    }
-
-    @Override
-    protected void initViews() {
-        super.initViews();
+        presenter.setCategory((Category) getArguments().get(ARG_CATEGORY));
         presenter.loadNotes();
+        return view;
     }
 
     @Override

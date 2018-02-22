@@ -3,6 +3,7 @@ package masters.vlad.humeniuk.notesviper.presentation.createnote.router;
 import android.app.Activity;
 
 import masters.vlad.humeniuk.notesviper.R;
+import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseActivity;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseRouter;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.view.CreateNoteFragment;
@@ -20,7 +21,7 @@ public class CreateNoteRouterImpl extends BaseRouter implements CreateNoteRouter
     }
 
     @Override
-    public void showCreateNoteFragment() {
-        showFragment(CreateNoteFragment.newInstance(), true);
+    public void showCreateNoteFragment(Category category) {
+        showFragment(CreateNoteFragment.newInstance(category), true);
     }
 }

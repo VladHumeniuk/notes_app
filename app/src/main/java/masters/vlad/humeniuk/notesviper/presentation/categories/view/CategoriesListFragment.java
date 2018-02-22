@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.di.components.ActivityComponent;
 import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseFragment;
+import masters.vlad.humeniuk.notesviper.presentation.base.list.ItemLongClickSelectedListener;
 import masters.vlad.humeniuk.notesviper.presentation.categories.presenter.CategoriesListPresenter;
 import masters.vlad.humeniuk.notesviper.presentation.categories.view.list.CategoryAdapter;
 
@@ -53,17 +55,12 @@ public class CategoriesListFragment extends BaseFragment implements CategoriesLi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-        adapter = new CategoryAdapter(getContext());
+        adapter = new CategoryAdapter(getContext(), listener);
         layoutManager = new LinearLayoutManager(getContext());
         categoriesListView.setLayoutManager(layoutManager);
         categoriesListView.setAdapter(adapter);
-        return view;
-    }
-
-    @Override
-    protected void initViews() {
-        super.initViews();
         presenter.init();
+        return view;
     }
 
     @Override
@@ -88,4 +85,18 @@ public class CategoriesListFragment extends BaseFragment implements CategoriesLi
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private ItemLongClickSelectedListener<Category> listener =
+            new ItemLongClickSelectedListener<Category>() {
+
+                @Override
+                public void onItemLongClick(Category entity) {
+                    presenter.onCategoryLongClick(entity);
+                }
+
+                @Override
+                public void onItemSelected(Category entity) {
+                    presenter.onCategorySelected(entity);
+                }
+            };
 }

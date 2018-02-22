@@ -19,6 +19,12 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
     public BaseAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         entities = new ArrayList<>();
+        setHasStableIds(true);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override

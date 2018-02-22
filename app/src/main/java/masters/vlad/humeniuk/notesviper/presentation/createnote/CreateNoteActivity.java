@@ -9,16 +9,25 @@ import javax.inject.Inject;
 
 import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.di.components.ActivityComponent;
+import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseActivity;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.router.CreateNoteRouter;
 
 public class CreateNoteActivity extends BaseActivity {
+
+    private static final String EXTRA_CATEGORY = "category";
 
     @Inject
     protected CreateNoteRouter router;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, CreateNoteActivity.class);
+        return intent;
+    }
+
+    public static Intent newIntent(Context context, Category category) {
+        Intent intent = new Intent(context, CreateNoteActivity.class);
+        intent.putExtra(EXTRA_CATEGORY, category);
         return intent;
     }
 
@@ -30,7 +39,7 @@ public class CreateNoteActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        router.showCreateNoteFragment();
+        router.showCreateNoteFragment((Category) getIntent().getExtras().get(EXTRA_CATEGORY));
     }
 
     @Override

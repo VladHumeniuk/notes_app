@@ -7,11 +7,16 @@ import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.presentation.base.list.BaseAdapter;
 import masters.vlad.humeniuk.notesviper.presentation.base.list.BaseViewHolder;
+import masters.vlad.humeniuk.notesviper.presentation.base.list.ItemLongClickSelectedListener;
 
 public class CategoryAdapter extends BaseAdapter<Category> {
 
-    public CategoryAdapter(Context context) {
+    private ItemLongClickSelectedListener<Category> listener;
+
+    public CategoryAdapter(Context context,
+                           ItemLongClickSelectedListener<Category> listener) {
         super(context);
+        this.listener = listener;
     }
 
     @Override
@@ -21,6 +26,6 @@ public class CategoryAdapter extends BaseAdapter<Category> {
 
     @Override
     protected BaseViewHolder createViewHolder(View itemView, int viewType) {
-        return new CategoryViewHolder(itemView);
+        return new CategoryViewHolder(itemView, listener);
     }
 }

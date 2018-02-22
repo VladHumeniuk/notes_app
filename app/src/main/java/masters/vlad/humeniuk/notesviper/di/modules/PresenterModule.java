@@ -12,6 +12,7 @@ import masters.vlad.humeniuk.notesviper.domain.interactors.CategoriesListInterac
 import masters.vlad.humeniuk.notesviper.domain.interactors.DeleteNoteInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.EditNoteInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.InitDbInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.NotesListByCategoryInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.NotesListInteractor;
 import masters.vlad.humeniuk.notesviper.presentation.categories.presenter.CategoriesListPresenter;
 import masters.vlad.humeniuk.notesviper.presentation.categories.presenter.CategoriesListPresenterImpl;
@@ -51,8 +52,10 @@ public class PresenterModule {
     NotesListPresenter provideNotesListPresenter(NotesListRouter notesListRouter,
                                                  @Named(IO_SCHEDULER) Scheduler ioScheduler,
                                                  @Named(UI_SCHEDULER) Scheduler uiScheduler,
-                                                 NotesListInteractor notesListInteractor) {
-        return new NotesListPresenterImpl(notesListRouter, ioScheduler, uiScheduler, notesListInteractor);
+                                                 NotesListInteractor notesListInteractor,
+                                                 NotesListByCategoryInteractor notesListByCategoryInteractor) {
+        return new NotesListPresenterImpl(notesListRouter, ioScheduler, uiScheduler,
+                notesListInteractor, notesListByCategoryInteractor);
     }
 
     @Provides

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import io.reactivex.Scheduler;
+import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.domain.entity.Note;
 import masters.vlad.humeniuk.notesviper.domain.interactors.AddNoteInteractor;
 import masters.vlad.humeniuk.notesviper.presentation.base.RxPresenter;
@@ -49,6 +50,11 @@ public class CreateNotePresenterImpl extends RxPresenter implements CreateNotePr
     @Override
     public void setView(CreateNoteView view) {
         this.view = view;
+    }
+
+    @Override
+    public void setDefaultCategory(Category category) {
+        //TODO
     }
 
     private void saveNote(Note note) {

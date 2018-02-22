@@ -5,6 +5,7 @@ import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseActivity;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseRouter;
 import masters.vlad.humeniuk.notesviper.presentation.createcategory.CreateCategoryActivity;
+import masters.vlad.humeniuk.notesviper.presentation.noteslist.view.NotesListFragment;
 
 public class CategoriesListRouterImpl extends BaseRouter implements CategoriesListRouter {
 
@@ -16,7 +17,7 @@ public class CategoriesListRouterImpl extends BaseRouter implements CategoriesLi
 
     @Override
     public void showCategoryNotes(Category category) {
-        //TODO
+        showFragment(NotesListFragment.newInstance(category), true);
     }
 
     @Override
