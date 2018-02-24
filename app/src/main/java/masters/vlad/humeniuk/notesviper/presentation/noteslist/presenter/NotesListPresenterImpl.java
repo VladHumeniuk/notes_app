@@ -60,7 +60,7 @@ public class NotesListPresenterImpl extends RxPresenter implements NotesListPres
 
     @Override
     public void onCreateNote() {
-        router.openCreateNote();
+        router.openCreateNote(category);
     }
 
     private void loadAllNotes() {

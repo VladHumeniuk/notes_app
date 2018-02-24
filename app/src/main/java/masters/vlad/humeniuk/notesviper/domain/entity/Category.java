@@ -11,6 +11,9 @@ public class Category implements Parcelable {
 
     private String color;
 
+    public Category() {
+    }
+
     public long getId() {
         return id;
     }
@@ -36,6 +39,16 @@ public class Category implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Category && this.id == ((Category) obj).getId();
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
@@ -45,9 +58,6 @@ public class Category implements Parcelable {
         dest.writeLong(this.id);
         dest.writeString(this.name);
         dest.writeString(this.color);
-    }
-
-    public Category() {
     }
 
     protected Category(Parcel in) {

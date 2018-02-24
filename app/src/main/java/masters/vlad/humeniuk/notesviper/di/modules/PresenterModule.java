@@ -63,8 +63,10 @@ public class PresenterModule {
     CreateNotePresenter provideCreateNotePresenter(CreateNoteRouter router,
                                                    @Named(IO_SCHEDULER) Scheduler ioScheduler,
                                                    @Named(UI_SCHEDULER) Scheduler uiScheduler,
-                                                   AddNoteInteractor addNoteInteractor) {
-        return new CreateNotePresenterImpl(router, ioScheduler, uiScheduler, addNoteInteractor);
+                                                   AddNoteInteractor addNoteInteractor,
+                                                   CategoriesListInteractor categoriesListInteractor) {
+        return new CreateNotePresenterImpl(router, ioScheduler, uiScheduler,
+                addNoteInteractor, categoriesListInteractor);
     }
 
     @Provides
@@ -73,9 +75,10 @@ public class PresenterModule {
                                                @Named(IO_SCHEDULER) Scheduler ioScheduler,
                                                @Named(UI_SCHEDULER) Scheduler uiScheduler,
                                                EditNoteInteractor editNoteInteractor,
-                                               DeleteNoteInteractor deleteNoteInteractor) {
+                                               DeleteNoteInteractor deleteNoteInteractor,
+                                               CategoriesListInteractor categoriesListInteractor) {
         return new EditNotePresenterImpl(router, ioScheduler, uiScheduler,
-                editNoteInteractor, deleteNoteInteractor);
+                editNoteInteractor, deleteNoteInteractor, categoriesListInteractor);
     }
 
     @Provides

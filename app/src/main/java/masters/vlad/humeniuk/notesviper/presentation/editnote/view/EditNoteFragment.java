@@ -3,6 +3,7 @@ package masters.vlad.humeniuk.notesviper.presentation.editnote.view;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,14 +11,17 @@ import android.view.MenuItem;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import masters.vlad.humeniuk.notesviper.R;
 import masters.vlad.humeniuk.notesviper.di.components.ActivityComponent;
+import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.domain.entity.Note;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseFragment;
+import masters.vlad.humeniuk.notesviper.presentation.createnote.view.spinner.CategoryAdapter;
 import masters.vlad.humeniuk.notesviper.presentation.editnote.presenter.EditNotePresenter;
 
 public class EditNoteFragment extends BaseFragment implements EditNoteView {
@@ -36,8 +40,13 @@ public class EditNoteFragment extends BaseFragment implements EditNoteView {
     @BindView(R.id.date_edited)
     protected AppCompatTextView editedTextView;
 
+    @BindView(R.id.category_view)
+    protected AppCompatSpinner categorySpinner;
+
     @Inject
     protected EditNotePresenter presenter;
+
+    private CategoryAdapter adapter;
 
     private DateFormat dateFormat = new SimpleDateFormat();
 
@@ -67,6 +76,13 @@ public class EditNoteFragment extends BaseFragment implements EditNoteView {
                 .setTitle(R.string.empty_note_fields_error)
                 .setCancelable(true)
                 .show();
+    }
+
+    @Override
+    public void showCategories(List<Category> categoryList, Category selectedCategory) {
+        adapter = new CategoryAdapter(getContext(), categoryList);
+        categorySpinner.setAdapter(adapter);
+        categorySpinner.setSelection(adapter.getPosition(selectedCategory));
     }
 
     @Override
@@ -107,7 +123,8 @@ public class EditNoteFragment extends BaseFragment implements EditNoteView {
         switch (item.getItemId()) {
             case R.id.action_save: {
                 presenter.saveNote(String.valueOf(titleEditText.getText()),
-                        String.valueOf(descriptionEditText.getText()));
+                        String.valueOf(descriptionEditText.getText()),
+                        (Category) categorySpinner.getSelectedItem());
                 return true;
             }
             case R.id.action_delete: {

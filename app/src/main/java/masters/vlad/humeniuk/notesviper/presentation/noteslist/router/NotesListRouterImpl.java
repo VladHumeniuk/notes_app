@@ -1,6 +1,7 @@
 package masters.vlad.humeniuk.notesviper.presentation.noteslist.router;
 
 import masters.vlad.humeniuk.notesviper.R;
+import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.domain.entity.Note;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseActivity;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseRouter;
@@ -24,7 +25,12 @@ public class NotesListRouterImpl extends BaseRouter implements NotesListRouter {
 
     @Override
     public void openCreateNote() {
-        startActivityForResult(CreateNoteActivity.newIntent(getActivityContext()),
+        openCreateNote(null);
+    }
+
+    @Override
+    public void openCreateNote(Category category) {
+        startActivityForResult(CreateNoteActivity.newIntent(getActivityContext(), category),
                 REQUEST_CREATE_NOTE);
     }
 }

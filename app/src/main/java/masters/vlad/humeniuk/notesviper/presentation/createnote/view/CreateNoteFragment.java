@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatSpinner;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,6 +22,7 @@ import masters.vlad.humeniuk.notesviper.di.components.ActivityComponent;
 import masters.vlad.humeniuk.notesviper.domain.entity.Category;
 import masters.vlad.humeniuk.notesviper.presentation.base.BaseFragment;
 import masters.vlad.humeniuk.notesviper.presentation.createnote.presenter.CreateNotePresenter;
+import masters.vlad.humeniuk.notesviper.presentation.createnote.view.spinner.CategoryAdapter;
 
 public class CreateNoteFragment extends BaseFragment implements CreateNoteView {
 
@@ -30,8 +34,13 @@ public class CreateNoteFragment extends BaseFragment implements CreateNoteView {
     @BindView(R.id.description)
     protected AppCompatEditText descriptionEditText;
 
+    @BindView(R.id.category_view)
+    protected AppCompatSpinner categorySpinner;
+
     @Inject
     protected CreateNotePresenter presenter;
+
+    private CategoryAdapter adapter;
 
     public static CreateNoteFragment newInstance(Category category) {
 
@@ -64,7 +73,13 @@ public class CreateNoteFragment extends BaseFragment implements CreateNoteView {
 
     @Override
     public void showDefaultCategory(Category category) {
-        //TODO
+        categorySpinner.setSelection(adapter.getPosition(category));
+    }
+
+    @Override
+    public void showCategories(List<Category> categoryList) {
+        adapter = new CategoryAdapter(getContext(), categoryList);
+        categorySpinner.setAdapter(adapter);
     }
 
     @Override
@@ -76,6 +91,7 @@ public class CreateNoteFragment extends BaseFragment implements CreateNoteView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+        presenter.setView(this);
         presenter.setDefaultCategory((Category) getArguments().get(ARG_CATEGORY));
         return view;
     }
@@ -96,7 +112,8 @@ public class CreateNoteFragment extends BaseFragment implements CreateNoteView {
         switch (item.getItemId()) {
             case R.id.action_save: {
                 presenter.onSaveNote(String.valueOf(titleEditText.getText()),
-                        String.valueOf(descriptionEditText.getText()));
+                        String.valueOf(descriptionEditText.getText()),
+                        (Category) categorySpinner.getSelectedItem());
                 return true;
             }
             default: {

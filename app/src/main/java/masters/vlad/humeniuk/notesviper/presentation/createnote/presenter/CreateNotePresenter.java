@@ -5,7 +5,7 @@ import masters.vlad.humeniuk.notesviper.presentation.createnote.view.CreateNoteV
 
 public interface CreateNotePresenter {
 
-    void onSaveNote(String title, String description);
+    void onSaveNote(String title, String description, Category category);
 
     void setView(CreateNoteView view);
 

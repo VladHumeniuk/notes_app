@@ -21,8 +21,7 @@ public class CreateNoteActivity extends BaseActivity {
     protected CreateNoteRouter router;
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, CreateNoteActivity.class);
-        return intent;
+        return newIntent(context, null);
     }
 
     public static Intent newIntent(Context context, Category category) {
