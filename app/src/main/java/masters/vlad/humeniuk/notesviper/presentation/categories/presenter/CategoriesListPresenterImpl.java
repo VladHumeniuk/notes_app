@@ -36,7 +36,9 @@ public class CategoriesListPresenterImpl extends RxPresenter implements Categori
 
     @Override
     public void onCategoryLongClick(Category category) {
-        router.showEditCategory(category);
+        if (category.getId() != 1) {
+            router.showEditCategory(category);
+        }
     }
 
     @Override

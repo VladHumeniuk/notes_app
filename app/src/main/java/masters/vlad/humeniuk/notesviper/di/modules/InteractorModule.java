@@ -8,7 +8,9 @@ import masters.vlad.humeniuk.notesviper.di.scopes.UserScope;
 import masters.vlad.humeniuk.notesviper.domain.interactors.AddCategoryInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.AddNoteInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.CategoriesListInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.DeleteCategoryInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.DeleteNoteInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.EditCategoryInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.EditNoteInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.InitDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.NotesListByCategoryInteractor;
@@ -16,7 +18,9 @@ import masters.vlad.humeniuk.notesviper.domain.interactors.NotesListInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.AddCategoryDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.AddNoteInteractorImpl;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.CategoriesListDbInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.DeleteCategoryDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.DeleteNoteDbInteractor;
+import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.EditCategoryDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.EditNoteDbInteractor;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.InitDbInteractorImpl;
 import masters.vlad.humeniuk.notesviper.domain.interactors.implementation.NotesListByCategoryDbInteractor;
@@ -81,5 +85,19 @@ public class InteractorModule {
     DeleteNoteInteractor provideDeleteNoteInteractor(NoteDao noteDao,
                                                    NoteDbMapper mapper) {
         return new DeleteNoteDbInteractor(noteDao, mapper);
+    }
+
+    @Provides
+    @UserScope
+    EditCategoryInteractor provideEditCategoryInteractor(CategoryDao categoryDao,
+                                                         CategoryDbMapper mapper) {
+        return new EditCategoryDbInteractor(categoryDao, mapper);
+    }
+
+    @Provides
+    @UserScope
+    DeleteCategoryInteractor provideDeleteCategoryInteractor(CategoryDao categoryDao,
+                                                             CategoryDbMapper mapper) {
+        return new DeleteCategoryDbInteractor(categoryDao, mapper);
     }
 }

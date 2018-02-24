@@ -10,16 +10,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.main.MainActivity">
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.createnote.CreateNoteActivity" />
-        <activity android:name=".presentation.editnote.EditNoteActivity" />
-        <activity android:name=".presentation.createcategory.CreateCategoryActivity" />
+        <activity
+            android:name=".presentation.createnote.CreateNoteActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.editnote.EditNoteActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.createcategory.CreateCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.editcategory.EditCategoryActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
