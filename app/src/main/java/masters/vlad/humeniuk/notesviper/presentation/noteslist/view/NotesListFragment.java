@@ -32,6 +32,9 @@ public class NotesListFragment extends BaseFragment implements NotesListView {
     @BindView(R.id.notes_list)
     protected RecyclerView notesListView;
 
+    @BindView(R.id.empty_view)
+    protected View emptyView;
+
     @Inject
     protected NotesListPresenter presenter;
 
@@ -84,6 +87,9 @@ public class NotesListFragment extends BaseFragment implements NotesListView {
     @Override
     public void showNotesList(List<Note> notes) {
         adapter.setData(notes);
+        boolean empty = notes.isEmpty();
+        emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
+        notesListView.setVisibility(empty ? View.GONE : View.VISIBLE);
     }
 
     @OnClick(R.id.add_note)

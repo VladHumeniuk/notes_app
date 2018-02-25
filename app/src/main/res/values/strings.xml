@@ -5,6 +5,7 @@
     <string name="action_categories_list">Categories</string>
 
     <string name="notes_list_title">Notes List</string>
+    <string name="empty_list_text">Nothing to show</string>
 
     <string name="create_note_title">New Note</string>
     <string name="title_hint">Title</string>

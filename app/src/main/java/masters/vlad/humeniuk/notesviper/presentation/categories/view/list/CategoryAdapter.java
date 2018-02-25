@@ -21,7 +21,7 @@ public class CategoryAdapter extends BaseAdapter<Category> {
 
     @Override
     protected int getItemLayout(int viewType) {
-        return R.layout.simple_list_item;
+        return R.layout.category_list_item;
     }
 
     @Override
